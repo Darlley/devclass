@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/user/create', [UserController::class, 'create']);
+Route::get('/user/create', [UserController::class, 'index']);
 Route::post('/user/store', [UserController::class, 'store']);

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>DevClass</h1>
+    <h1 style="color: #ff3c00;">DEVCLASS <sup style="font-size: 8px; color: black;">BETA</sup></h1>
     @yield('portal')
 </body>
 </html>
