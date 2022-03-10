@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -34,7 +36,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        // 
+        // $user = new User();
+        // $user->name = 'Fulano';
+        // $user->email = 'fulano@mail.com';
+        // $user->password = Hash::make('fulano123');
+        // $user->save();
+
+        // cadastro pela request Mass assignment (atribuição em massa) EVITAR
+        $name = new User();
+        $name->create($request->all());
+
     }
 
     /**
