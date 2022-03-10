@@ -21,6 +21,7 @@
         </style>
     </head>
     <body class="antialiased">
+
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -126,7 +127,18 @@
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
                 </div>
+
+                <ol>
+                    @foreach ($posts as $post)
+                        <li>
+                            <h4 class="ml-4 leading-7 font-semibold">{{ $post->title }} </h4>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">{{ $post->description }}</p>
+                            <span class="mt-2 text-gray-600 dark:text-gray-400">Author - {{ $post->user->name }}</span>
+                        </li>
+                    @endforeach
+                </ol>
             </div>
         </div>
+
     </body>
 </html>

@@ -45,8 +45,20 @@ class UserController extends Controller
 
         // cadastro pela request Mass assignment (atribuição em massa) EVITAR
         $name = new User();
-        $name->create($request->all());
 
+        
+        
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        
+        // dd($request->all());
+        $name->create($request->all());
+        session()->flash('message','Cadastro com sucesso');
+
+        return back();
     }
 
     /**
