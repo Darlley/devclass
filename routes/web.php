@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/user/create', [UserController::class, 'index']);
 Route::post('/user/store', [UserController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login/store', [LoginController::class, 'store']);

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user_create');
+        return view('login');
     }
 
     /**
@@ -35,28 +35,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        // 
-        // $user = new User();
-        // $user->name = 'Fulano';
-        // $user->email = 'fulano@mail.com';
-        // $user->password = Hash::make('fulano123');
-        // $user->save();
-
-        // cadastro pela request Mass assignment (atribuição em massa) EVITAR
-
-        $name = new User();
-        
-        // dd($request->all());
-        $name->create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=> Hash::make($request->password)
+        $credentials = $request->validate([
+            'email'=>'required|email',
+            'password'=>'required'
         ]);
-        session()->flash('message','Cadastro com sucesso');
+        $auth = Auth::attempt($credentials);
 
-        auth()->login($name);
+        if(!$auth){
+            session()->flash('error', 'Erro ao logar');
+            return back();
+        }
 
         return redirect('/');
     }
