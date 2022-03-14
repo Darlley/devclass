@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Mail\RegistrationEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -57,6 +59,8 @@ class UserController extends Controller
         session()->flash('message','Cadastro com sucesso');
 
         auth()->login($name);
+
+        Mail::to('darlleybrito@gmail.com')->send(new RegistrationEmail);
 
         return redirect('/');
     }
